@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8"><title><%= quiz.title %></title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light py-4">
+    <div class="container">
+        <a href="/quizzes" class="btn btn-outline-secondary mb-3">&larr; Return</a>
+        <h2 class="text-xl font-weight-bold"><%= quiz.title %></h2>
+        <p class="text-lg mb-4"><%= quiz.description %></p>
+        <h2 class="text-xl font-weight-bold">Questions</h2>
+        <div class="row row-cols-1">
+            <% quiz.questions.forEach((q, index) => { %>
+            <div class="col">
+                <div class="d-flex align-content-center p-1 border" style="cursor: pointer;" 
+                onclick="window.location.href='/questions/<%= q._id %>'">
+                    <p class="text-sm"><%= q.text %></p>
+                </div>
+            </div>
+            <% }) %>
+            <% if(quiz.questions.length === 0) { %>
+                <div class="alert alert-warning">(Empty)</div>
+            <% } %>
+        </div>
+         <a href="/quizzes/edit/<%= quiz._id %>" class="mt-3 btn btn-warning">Edit Quiz</a>
+    </div>
+   
+</body>
+</html>

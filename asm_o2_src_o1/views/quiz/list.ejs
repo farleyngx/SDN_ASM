@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8"><title>Quiz</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container py-4">
+        <a href="/" class="btn btn-outline-secondary mb-3">&larr; Return</a>
+        <h2 class="h3 text-dark mb-4">Quizzes</h2>
+        <a href="/quizzes/create" class="btn btn-primary mb-3">Create new quiz</a>
+        
+        <div class="row row-cols-1">
+            <% quizzes.forEach(quiz => { %>
+                <div class="col">
+                 <div class="p-2 border" style="cursor: pointer;" 
+                    onclick="window.location.href='/quizzes/<%= quiz._id %>'">
+                        <div class="d-flex justify-content-between">
+                            <p  class="text-indigo "><%= quiz.title %></p>
+                            <form action="/quizzes/delete/<%= quiz._id %>?_method=DELETE" method="POST" onsubmit="event.stopPropagation(); return confirm('Are you sure to delete this quiz?')" onclick="event.stopPropagation();">
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                            
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+        </div>
+    </div>
+</body>
+</html>

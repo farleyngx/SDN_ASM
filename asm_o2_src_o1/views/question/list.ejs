@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kho Câu Hỏi</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container py-4">
+        <a href="/" class="btn btn-outline-secondary mb-3">&larr; Return</a>
+        <h2 class="h3 text-dark mb-4">Questions</h2>
+        <a href="/questions/create" class="btn btn-primary mb-3">Create new question</a>
+
+        <div class="row row-cols-1">
+            <% questions.forEach(question => { %>
+                <div class="col">
+                 <div class="p-3 border">
+                        <div class="d-flex justify-content-between">
+                            <a href="/questions/<%= question._id %>"><%= question.text %></a>
+                            <form action="/questions/delete/<%= question._id %>?_method=DELETE" method="POST" onsubmit="return confirm('Are you sure to delete this question?')">
+                                <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <% }) %>
+
+            <% if(questions.length === 0) { %>
+                <div class="alert alert-info text-center py-4">(Empty))</div>
+            <% } %>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
